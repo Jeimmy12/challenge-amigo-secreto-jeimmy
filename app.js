@@ -1,48 +1,30 @@
-// Nombre: Jeimmy Eche
 // Array para almacenar los nombres de los amigos
 let amigosList = [];
-
-// Función para cargar la lista desde localStorage
-function cargarListaAmigos() {
-    const listaGuardada = localStorage.getItem('amigosList');
-    if (listaGuardada) {
-        amigosList = JSON.parse(listaGuardada);
-        actualizarListaAmigos();
-    }
-}
-
-// Función para guardar la lista en localStorage
-function guardarListaAmigos() {
-    localStorage.setItem('amigosList', JSON.stringify(amigosList));
-}
 
 // Función para agregar un amigo a la lista
 function agregarAmigo() {
     const input = document.getElementById('amigo'); // Campo de entrada
     const nombre = input.value.trim(); // Valor del campo, eliminando espacios en blanco
 
-    if (nombre == "") {
+    if (nombre === "") {
         alert("Debes escribir un nombre"); // Alerta si el campo está vacío
-        return; // Detiene la ejecución de la función
-    }else{
+        return;
+    }
 
     amigosList.push(nombre); // Agrega el nombre al array
     input.value = ''; // Limpia el campo de entrada
     actualizarListaAmigos(); // Actualiza la lista en el HTML
-    guardarListaAmigos(); // Guarda la lista en localStorage
-    
-    // Muestra la lista de amigos si estaba oculta
-    const listaAmigos = document.getElementById('listaAmigos');
-    listaAmigos.classList.remove('hidden');
-    }
-} 
+
+    // Muestra la lista de amigos
+    document.getElementById('listaAmigos').classList.remove('hidden');
+}
 
 // Función para actualizar la lista de amigos en el HTML
 function actualizarListaAmigos() {
     const listaAmigos = document.getElementById('listaAmigos');
     listaAmigos.innerHTML = ''; // Limpia la lista actual
 
-    amigosList.forEach((amigo, index) => {
+    amigosList.forEach(amigo => {
         const li = document.createElement('li');
         li.textContent = amigo;
         listaAmigos.appendChild(li);
@@ -75,9 +57,30 @@ function sortearAmigo() {
     resultado.appendChild(li);
 }
 
-// Event listeners para los botones
-document.querySelector('.button-add').addEventListener('click', agregarAmigo);
-document.querySelector('.button-draw').addEventListener('click', sortearAmigo);
+// Función para borrar la lista de amigos y el mensaje del sorteo
+function borrarLista() {
+    if (amigosList.length === 0) {
+        alert("La lista ya está vacía.");
+        return;
+    }
 
-// Cargar la lista de amigos al cargar la página
-window.onload = cargarListaAmigos;
+    // Vacía el array
+    amigosList = [];
+
+    // Elimina el contenido de la lista de amigos y del resultado del sorteo
+    const listaAmigos = document.getElementById('listaAmigos');
+    const resultado = document.getElementById('resultado');
+    listaAmigos.innerHTML = '';
+    resultado.innerHTML = '';
+
+    // Opcional: vuelve a mostrar la lista si estuviera oculta
+    listaAmigos.classList.remove('hidden');
+    resultado.classList.remove('hidden');
+
+    alert("Se han eliminado todos los elementos de la pantalla.");
+}
+
+// Asignación de event listeners sin usar atributos inline en el HTML
+document.querySelector('.button-add').addEventListener('click', agregarAmigo);
+document.querySelector('button[aria-label="Sortear amigo secreto"]').addEventListener('click', sortearAmigo);
+document.querySelector('button[aria-label="Borrar lista de amigos"]').addEventListener('click', borrarLista);

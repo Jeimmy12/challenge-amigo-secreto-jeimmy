@@ -10,6 +10,24 @@
 .hidden {
     display: none;
 }
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.button-clear {
+    background-color: #ff4d4d; /* Color rojo para el botón de borrar */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-clear:hover {
+    background-color: #cc0000; /* Color rojo oscuro al pasar el mouse */
+}
 /* Estilos generales */
 * {
     margin: 0;
