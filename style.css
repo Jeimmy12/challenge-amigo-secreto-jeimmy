@@ -7,7 +7,9 @@
     --color-text: #444444;
     --color-white: #FFFFFF;
 }
-
+.hidden {
+    display: none;
+}
 /* Estilos generales */
 * {
     margin: 0;
