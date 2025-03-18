@@ -15,7 +15,7 @@ function agregarAmigo() {
         alert("Debes escribir un nombre")
     }
 }
-
+ 
 // Función para actualizar la lista de amigos en el HTML
 function actualizarListaAmigos() {
     const listaAmigos = document.getElementById('listaAmigos');
